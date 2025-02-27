@@ -39,14 +39,14 @@ class ManagerServiceTest {
     private ManagerService managerService;
 
     @Test
-    public void manager_목록_조회_시_Todo가_없다면_IRE_에러를_던진다() {
+    public void manager_목록_조회_시_Todo가_없다면_IRE_에러를_던진다() { //<- 내가 하고자 하는 테스트
         // given
         long todoId = 1L;
         given(todoRepository.findById(todoId)).willReturn(Optional.empty());
 
         // when & then
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> managerService.getManagers(todoId));
-        assertEquals("Todo not found", exception.getMessage());
+        assertEquals("Todo not found", exception.getMessage()); // <-일정 없을때 발생해야 되는데 왜 Manager 로 되어있지?
     }
 
     @Test
